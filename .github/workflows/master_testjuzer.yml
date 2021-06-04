@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+env:
+  TEST_STRING: ${{ secrets.TEST_STRING }}
+
 jobs:
   build-and-deploy:
     runs-on: windows-latest
@@ -34,8 +37,7 @@ jobs:
 
     - name: dotnet publish
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      env:
-        TEST_STRING: ${{ secrets.TEST_STRING }}
+      
 
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
