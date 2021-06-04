@@ -11,7 +11,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-
+    env:
+      TEST_STRING: ${{ secrets.TEST_STRING }}
     steps:
     # checkout the repo
     - name: 'Checkout Github Action'
@@ -29,9 +30,6 @@ jobs:
 
     - name: Build with dotnet
       run: dotnet build --configuration Release
-      env:
-          CI: true
-          TEST_STRING: ${{ secrets.TEST_STRING }}
 
     - name: dotnet publish
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
