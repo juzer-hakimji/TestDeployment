@@ -32,12 +32,9 @@ jobs:
 
     - name: Build with dotnet
       run: dotnet build --configuration Release
-      env:
-        TEST_STRING: ${{ secrets.TEST_STRING }}
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-      
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp      
 
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
@@ -46,5 +43,3 @@ jobs:
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_461CFB6B8D42419FA7F58944D621BA78 }}
         package: ${{env.DOTNET_ROOT}}/myapp
-      env:
-        TEST_STRING: ${{ secrets.TEST_STRING }}
