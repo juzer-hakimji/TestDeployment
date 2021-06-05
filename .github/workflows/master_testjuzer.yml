@@ -43,3 +43,11 @@ jobs:
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_461CFB6B8D42419FA7F58944D621BA78 }}
         package: ${{env.DOTNET_ROOT}}/myapp
+        app-settings-json: |
+         [
+             {
+                 "name": "TEST_STRING",
+                 "value": "${{ secrets.TEST_STRING }}",
+                 "slotSetting": false
+             }
+         ]
